@@ -14,14 +14,15 @@ const html = {
     welkomWEB: contentDir + "welkomWEB.html",
 
     overmij: contentDir + "overmij.html",
+    projecten: contentDir + "projecten.html",
 };
 
 function genEPortfolio() {
-    return src([html.welkomEP, html.overmij]).pipe(dest(eportfolioDir));
+    return src([html.welkomEP, html.overmij, html.projecten]).pipe(dest(eportfolioDir));
 }
 
 function genSPA() {
-    var webpages = [html.welkomWEB, html.overmij];
+    var webpages = [html.welkomWEB, html.overmij, html.projecten];
     var content = "<h1>Portfolio R0751964</h1>";
     for (var i = 0; i < webpages.length; i++) {
         content += fs.readFileSync(webpages[i], "utf-8");
