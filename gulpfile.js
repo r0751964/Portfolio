@@ -34,4 +34,8 @@ function genSPA() {
         .pipe(dest(websiteDir));
 }
 
+function copyResources() {
+    return src(contentDir + "resources/").pipe(dest(websiteDir + "resources/"))
+}
+
 exports.default = parallel(genEPortfolio, genSPA);
