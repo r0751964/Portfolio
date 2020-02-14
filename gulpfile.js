@@ -18,7 +18,7 @@ const html = {
 };
 
 function genEPortfolio() {
-    return src([html.welkomEP, html.overmij, html.projecten]).pipe(replace(/<h1>.*<\/h1>/g, "")).pipe(dest(eportfolioDir));
+    return src([html.welkomEP, html.overmij, html.projecten]).pipe(replace(/(<h1>.*<\/h1>)?/, "", )).pipe(dest(eportfolioDir));
 }
 
 function genSPA() {
