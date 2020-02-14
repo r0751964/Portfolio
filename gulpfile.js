@@ -18,12 +18,12 @@ const html = {
 };
 
 function genEPortfolio() {
-    return src([html.welkomEP, html.overmij, html.projecten]).pipe(dest(eportfolioDir));
+    return src([html.welkomEP, html.overmij, html.projecten]).pipe(replace(/<h1>.*<\/h1>/g, "")).pipe(dest(eportfolioDir));
 }
 
 function genSPA() {
     var webpages = [html.welkomWEB, html.overmij, html.projecten];
-    var content = "<h1>Portfolio R0751964</h1>";
+    var content = "";
     for (var i = 0; i < webpages.length; i++) {
         content += fs.readFileSync(webpages[i], "utf-8");
     }
@@ -31,7 +31,8 @@ function genSPA() {
 
     return src(html.template)
         .pipe(replace("<!-- Content -->", content))
-        .pipe(replace("<h1>", "<h2>"))
+        .pipe(replace("<h2>", "<h3>")).pipe(replace("</h2>", "</h3>"))
+        .pipe(replace("<h1>", "<h2>")).pipe(replace("</h1>", "</h2>"))
         .pipe(dest(websiteDir));
 }
 
