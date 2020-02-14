@@ -1,6 +1,7 @@
 const fs = require("fs");
 const { src, dest, series, parallel } = require("gulp");
 const replace = require("gulp-replace");
+const resizer = require("gulp-images-resizer");
 
 
 const contentDir = "portfolio/";
@@ -37,7 +38,9 @@ function genSPA() {
 }
 
 function copyResources() {
-    return src(contentDir + "resources/*").pipe(dest(websiteDir + "resources/"))
+    return src(contentDir + "resources/*")
+        .pipe(resizer({width:600,height:-1,verbose:true}))
+        .pipe(dest(websiteDir + "resources/"))
 }
 
 exports.default = parallel(genEPortfolio, genSPA, copyResources);
